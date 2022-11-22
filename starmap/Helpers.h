@@ -29,7 +29,7 @@ struct Node{
 public:
     Node(Star newstar);
     ~Node();
-    void insert(Star newstar, size_t d);
+    Node* insert(Node* root,Star newstar,size_t d);
     void findN(size_t num, Point target, size_t depth, priority_queue<Entry>& queue);
 };
 
