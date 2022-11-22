@@ -52,28 +52,19 @@ Node::~Node(){
         delete left;
         delete right;
     }
-Node* Node::insert(Star newstar,size_t d){
-        if(getdv(newstar,d)>=getdv(data,d)&&left==nullptr){
-            Node* n=new Node(newstar);
-            n->depth=next(d);
-            left=n;
-            n=nullptr;
-            return this;
+void Node::insert(Star newstar,size_t d){
+        if(getdv(newstar,d)>=getdv(data,d)&&right==nullptr){
+            right=new Node(newstar);
         }
-        else if(getdv(newstar,d)<getdv(data,d)&&right==nullptr){
-            Node* n=new Node(newstar);
-            n->depth=next(d);
-            right=n;
-            n=nullptr;
-            return this;
-        }
-        else if(getdv(newstar,d)<getdv(data,d)){
-            right=right->insert(newstar,next(d));
-            return this;
+        else if(getdv(newstar,d)<getdv(data,d)&&left==nullptr){
+            left=new Node(newstar);
         }
         else if(getdv(newstar,d)>=getdv(data,d)){
-            left=left->insert(newstar,next(d));
-            return this;
+            right->insert(newstar,next(d));
+            
+        }
+        else if(getdv(newstar,d)<getdv(data,d)){
+            left->insert(newstar,next(d));
         }
         else throw std::overflow_error("wrong insert");
         

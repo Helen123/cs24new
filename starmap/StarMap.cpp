@@ -29,11 +29,14 @@ StarMap::StarMap(std::istream& stream){
     std::getline(ss, token,'\t' );
     z=stof(token);
     Star s=Star{id,x,y,z};
-    if(id==1){
+    id++;
+    if(s.id==1){
       root=new Node(s);
+      id++;
     }
     else{
       root->insert(s,1);
+
     }
   }
 }
