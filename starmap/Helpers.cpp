@@ -57,12 +57,14 @@ Node* Node::insert(Star newstar,size_t d){
             Node* n=new Node(newstar);
             n->depth=next(d);
             left=n;
+            n=nullptr;
             return this;
         }
         else if(getdv(newstar,d)<getdv(data,d)&&right==nullptr){
             Node* n=new Node(newstar);
             n->depth=next(d);
             right=n;
+            n=nullptr;
             return this;
         }
         else if(getdv(newstar,d)<getdv(data,d)){
