@@ -57,15 +57,23 @@ Node* Node::insert(Node* root,Star newstar,size_t d){
     if(root==nullptr){
         return new Node(newstar);
     }
-    if(getdv(newstar,d)>=getdv(data,d)){
+    if(getdv(newstar,d)>=getdv(data,d)&&right!=nullptr){
         root->right=insert(right,newstar,next(d));
         return root;
     }
-    else{
+    if(getdv(newstar,d)>=getdv(data,d)&&right==nullptr){
+        root->right=new Node(newstar);
+        return root;
+    }
+    if(getdv(newstar,d)<getdv(data,d)&&left!=nullptr){
             root->left=insert(left,newstar,next(d));
             return root;
     }
-
+    if(getdv(newstar,d)<getdv(data,d)&&left==nullptr){
+            root->left=new Node(newstar);
+            return root;
+    }
+throw std::overflow_error("wrong insert");
         
     }
 float distance(Point p, Star s){

@@ -32,7 +32,6 @@ StarMap::StarMap(std::istream& stream){
     id++;
     if(s.id==1){
       root=new Node(s);
-      id++;
     }
     else{
       root->insert(root,s,1);
