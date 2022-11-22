@@ -52,19 +52,7 @@ Node::~Node(){
         delete left;
         delete right;
     }
-Node* Node::insert(Node* ptr, Star nextStar, size_t nextDepth){
-  if (ptr == nullptr){
-    return new Node(nextStar);
-  }
-  size_t dim = nextDepth % 3;
-  if (((dim == 0) && (nextStar.x >= ptr -> data.x)) || ((dim == 1) && (nextStar.y >= ptr -> data.y)) || ((dim == 2) && (nextStar.z >= ptr -> data.z))){
-    ptr -> right = insert(ptr -> right, nextStar, nextDepth + 1);
-  }
-  else {
-    ptr -> left = insert(ptr -> left, nextStar, nextDepth + 1);
-  }
-  return ptr;
-}
+
 Node* Node::insert(Node* root,Star newstar,size_t d){
     if(root==nullptr){
         return new Node(newstar);
