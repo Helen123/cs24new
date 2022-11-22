@@ -59,10 +59,13 @@ Node* Node::insert(Node* root,Star newstar,size_t d){
     }
     if(getdv(newstar,d)>=getdv(data,d)){
         root->right=insert(right,newstar,next(d));
+        return root;
     }
     else{
             root->left=insert(left,newstar,next(d));
+            return root;
     }
+
         
     }
 float distance(Point p, Star s){
