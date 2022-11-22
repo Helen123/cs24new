@@ -10,6 +10,23 @@ using std::istringstream;
 using std::string;
 
 
+Node* insert(Node* root,Star newstar,size_t d){
+    if(root==nullptr){
+        return new Node(newstar);
+    }
+    if(getdv(newstar,d)>=getdv(root->data,d)){
+        root->right=insert(root->right,newstar,next(d));
+        return root;
+    }
+    if(getdv(newstar,d)<getdv(root->data,d)){
+            root->left=insert(root->left,newstar,next(d));
+            return root;
+    }
+throw std::overflow_error("wrong insert");
+        
+    }
+
+
 StarMap* StarMap::create(std::istream& stream) {
   // This default implementation will probably do what you want.
   // If you use a different constructor, you'll need to change it.
@@ -34,7 +51,7 @@ StarMap::StarMap(std::istream& stream){
       root=new Node(s);
     }
     else{
-      root->insert(root,s,1);
+      insert(root,s,1);
 
     }
   }
