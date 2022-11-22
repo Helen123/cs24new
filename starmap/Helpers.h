@@ -12,9 +12,8 @@ using namespace std;
 struct Entry {
         Star      value;
         float       dist;
-     bool operator < (const Entry& other) const {
-        return this->dist < other.dist;
-    }
+        public:
+     bool operator < (const Entry& other) const;
     };
 
 struct Point{

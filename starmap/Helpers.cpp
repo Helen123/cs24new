@@ -3,6 +3,9 @@
 
 
 // Space to implement helper class member functions.
+bool Entry::operator < (const Entry& other) const {
+        return this->dist < other.dist;
+    }
 
 float getdv(Star s, size_t d){
     if(d==1){
@@ -92,7 +95,7 @@ Entry temp=Entry{data,distance(target,data)};
   else{
     nextBranch->findN(num,target,next(depth),queue);
   }
-  float margin=abs(getdv(temp.value,depth)-target.getpv(depth));
+  float margin=std::abs(getdv(temp.value,depth)-target.getpv(depth));
   if (queue.top().dist > margin){
     if(otherBranch==nullptr)return;
     else{
