@@ -19,6 +19,21 @@ float getdv(Star s, size_t d){
     }
     else throw std::overflow_error("wrong dimension");
 }
+float Point::getpv(size_t d){
+    if(d==1){
+        return x;
+    }
+    if(d==2){
+        return y;
+    }
+    if(d==1){
+        return z;
+    }
+    else{
+        throw std::overflow_error("wrong dimension");
+    }
+
+}
 size_t next(size_t d){
     if(d==1||d==2){
         return d+1;
@@ -67,7 +82,7 @@ float distance(Point p, Star s){
                 pow(p.z - s.z, 2) * 1.0);
   return d;
 }
-void Node::findN(size_t num, Point target, size_t depth, priority_queue<Entry> queue){
+void Node::findN(size_t num, Point target, size_t depth, priority_queue<Entry>& queue){
     
 Entry temp=Entry{data,distance(target,data)};
   if(queue.size()<num){

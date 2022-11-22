@@ -30,7 +30,7 @@ public:
     Node(Star newstar);
     ~Node();
     Node* insert(Star newstar, size_t d);
-    void findN(size_t num, Point target, size_t depth, priority_queue<Entry> queue);
+    void findN(size_t num, Point target, size_t depth, priority_queue<Entry>& queue);
 };
 
 
