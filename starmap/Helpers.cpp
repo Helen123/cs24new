@@ -110,7 +110,7 @@ Entry temp=Entry{data,distance(target,data)};
   else{
     nextBranch->findN(num,target,next(depth),queue);
   }
-  float margin=std::abs(getdv(temp.value,depth)-target.getpv(depth));
+  float margin=float(std::abs(getdv(temp.value,depth)-target.getpv(depth)));
   if (queue.top().dist > margin){
     if(otherBranch==nullptr)return;
     else{
