@@ -14,6 +14,7 @@ float getdv(Star s, size_t d){
     if(d==3){
         return s.z;
     }
+    else throw std::overflow_error("wrong dimension");
 }
 size_t next(size_t d){
     if(d==1||d==2){
@@ -54,7 +55,7 @@ Node* Node::insert(Star newstar,size_t d){
             left=left->insert(newstar,next(d));
             return this;
         }
-        else 
+        else throw std::overflow_error("wrong insert");
         
     }
 float distance(Point p, Star s){
@@ -85,10 +86,18 @@ Entry temp=Entry{data,distance(target,data)};
     nextBranch =left;
     otherBranch =right;
   }
-  nextBranch->findN(num,target,depth+1,queue);
+  if(nextBranch==nullptr){
+    return;
+  }
+  else{
+    nextBranch->findN(num,target,next(depth),queue);
+  }
   float margin=abs(getdv(temp.value,depth)-target.getpv(depth));
   if (queue.top().dist > margin){
-    otherBranch->findN(num,target, depth+1, queue);
+    if(otherBranch==nullptr)return;
+    else{
+    otherBranch->findN(num,target, next(depth), queue);
+    }
   }
   
 }
