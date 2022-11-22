@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <math.h>
+#include <cmath>
 using std::istringstream;
 using std::string;
 
@@ -53,9 +53,8 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
  std::vector<Star> result;
    while (! result.empty() ){
     Entry temp = queue.top();
-    result.push_back(temp.value);
+    result.insert(result.begin(),temp.value);
     queue.pop();
   }
-  reverse(result.begin(), result.end());
   return result;
 }
