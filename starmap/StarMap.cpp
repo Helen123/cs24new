@@ -35,7 +35,7 @@ StarMap::StarMap(std::istream& stream){
       id++;
     }
     else{
-      root->insert(s,1);
+      root->insert(root,s,1);
 
     }
   }
