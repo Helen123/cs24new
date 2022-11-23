@@ -16,7 +16,6 @@ public:
 
 private:
     Node* root=nullptr;
-    priority_queue<Entry> queue;
     //std::set <Star> stars;
 
     
