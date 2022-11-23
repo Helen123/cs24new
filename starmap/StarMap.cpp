@@ -73,8 +73,8 @@ Entry temp=Entry{root->data,distance(target,root->data)};
   if(queue.size()<num){
     queue.push(temp);
   }
-  if(queue.size()>=num){
-        if(temp<queue.top()){
+  else if(queue.size()>=num){
+        if(temp.dist<queue.top().dist){
             queue.pop();
             queue.push(temp);
         }
