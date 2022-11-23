@@ -59,43 +59,6 @@ float distance(Point p, Star s){
                 pow(p.z - s.z, 2) * 1.0);
   return d;
 }
-void Node::findN(size_t num, Point target, size_t depth, priority_queue<Entry>& queue){
-    
-Entry temp=Entry{data,distance(target,data)};
-  if(queue.size()<num){
-    queue.push(temp);
-  }
-  if(queue.size()==num){
-        if(temp<queue.top()){
-            queue.pop();
-            queue.push(temp);
-        }
-  }
-  Node* nextBranch = nullptr;
-  Node* otherBranch = nullptr;
-  if (target.getpv(depth)>=getdv(data,depth)){
-    nextBranch =right;
-    otherBranch =left;
-  }
-  else{
-    nextBranch =left;
-    otherBranch =right;
-  }
-  if(nextBranch==nullptr){
-    return;
-  }
-  else{
-    nextBranch->findN(num,target,next(depth),queue);
-  }
-  float margin=getdv(temp.value,depth)-target.getpv(depth);
-  if(margin<0){
-    margin=-margin;
-  }
-  if (queue.top().dist > margin){
-    if(otherBranch==nullptr)return;
-    else{
-    otherBranch->findN(num,target, next(depth), queue);
-    }
-  }
+
   
-}
+

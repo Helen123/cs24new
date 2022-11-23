@@ -10,6 +10,7 @@ using namespace std;
 // here's some space to do it in.
 float getdv(Star s, size_t d);
 size_t next(size_t d);
+float distance(Point p, Star s);
 
 struct Entry {
         Star      value;
@@ -31,7 +32,6 @@ struct Node{
 public:
     Node(Star newstar);
     ~Node();
-    void findN(size_t num, Point target, size_t depth, priority_queue<Entry>& queue);
 };
 
 

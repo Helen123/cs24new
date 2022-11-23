@@ -65,10 +65,48 @@ float distance(float x, float y, float z, Star& s){
                 pow(z - s.z, 2) * 1.0);
   return d;
 }
+void findN(Node* root,size_t num, Point target, size_t depth, priority_queue<Entry>& queue){
+    if(root==nullptr){
+      return;
+    }
+Entry temp=Entry{root->data,distance(target,root->data)};
+  if(queue.size()<num){
+    queue.push(temp);
+  }
+  if(queue.size()==num){
+        if(temp<queue.top()){
+            queue.pop();
+            queue.push(temp);
+        }
+  }
+  Node* nextBranch = nullptr;
+  Node* otherBranch = nullptr;
+  if (target.getpv(depth)>=getdv(root->data,depth)){
+    nextBranch =root->right;
+    otherBranch =root->left;
+  }
+  else{
+    nextBranch =root->left;
+    otherBranch =root->right;
+  }
+
+    findN(nextBranch,num,target,next(depth),queue);
+  
+  float margin=getdv(temp.value,depth)-target.getpv(depth);
+  if(margin<0){
+    margin=-margin;
+  }
+  if (queue.top().dist > margin){
+
+  findN(otherBranch,num,target, next(depth), queue);
+  
+  }
+  
+}
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
  priority_queue<Entry> queue;
  Point p={x,y,z};
- root->findN(n,p,1,queue);
+ findN(root,n,p,1,queue);
  std::vector<Star> result;
    while (! result.empty() ){
     Entry temp = queue.top();
