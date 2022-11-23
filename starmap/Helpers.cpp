@@ -53,12 +53,7 @@ Node::~Node(){
         delete right;
     }
 
-float distance(Point p, Star s){
-  float d = sqrt(pow(p.x-s.x, 2) +
-                pow(p.y -s.y, 2) +
-                pow(p.z - s.z, 2) * 1.0);
-  return d;
-}
+
 
   
 
