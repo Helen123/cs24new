@@ -59,17 +59,17 @@ StarMap::StarMap(std::istream& stream){
 StarMap::~StarMap(){
   delete root;
 }
-float distance(Point p, Star s){
-  float d = sqrt(pow(p.x-s.x, 2) +
+float distancesq(Point p, Star s){
+  float d = pow(p.x-s.x, 2) +
                 pow(p.y -s.y, 2) +
-                pow(p.z - s.z, 2) * 1.0);
+                pow(p.z - s.z, 2) * 1.0;
   return d;
 }
 void findN(Node* root,size_t num, Point target, size_t depth, priority_queue<Entry>& queue){
     if(root==nullptr){
       return;
     }
-Entry temp=Entry{root->data,distance(target,root->data)};
+Entry temp=Entry{root->data,distancesq(target,root->data)};
   if(queue.size()<num){
     queue.push(temp);
   }
@@ -96,7 +96,7 @@ Entry temp=Entry{root->data,distance(target,root->data)};
   if(margin<0){
     margin=-margin;
   }
-  if (queue.top().dist > margin){
+  if (queue.top().dist > pow(margin,2)){
 
   findN(otherBranch,num,target, next(depth), queue);
   
