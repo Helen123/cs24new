@@ -26,7 +26,7 @@ float Point::getpv(size_t d){
     if(d==2){
         return y;
     }
-    if(d==1){
+    if(d==3){
         return z;
     }
     else{
