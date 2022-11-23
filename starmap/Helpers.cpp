@@ -17,7 +17,7 @@ float getdv(Star s, size_t d){
     if(d==3){
         return s.z;
     }
-    else throw std::overflow_error("wrong dimension");
+    else throw std::overflow_error("getdv wrong dimension");
 }
 float Point::getpv(size_t d){
     if(d==1){
@@ -30,7 +30,7 @@ float Point::getpv(size_t d){
         return z;
     }
     else{
-        throw std::overflow_error("wrong dimension");
+        throw std::overflow_error("getpv wrong dimension");
     }
 
 }
