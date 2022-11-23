@@ -34,7 +34,7 @@ StarMap* StarMap::create(std::istream& stream) {
 }
 StarMap::StarMap(std::istream& stream){
   std::string line;
-  int id=0;
+  int id=1;
   while (std::getline(stream, line)){
     std::string token;
     std::stringstream ss(line);
