@@ -15,7 +15,8 @@ public:
     static StarMap* create(std::istream& stream);
 
 private:
-    Node* root;
+    Node* root=nullptr;
+    priority_queue<Entry> queue;
     //std::set <Star> stars;
 
     

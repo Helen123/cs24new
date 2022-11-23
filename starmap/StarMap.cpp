@@ -73,7 +73,7 @@ Entry temp=Entry{root->data,distance(target,root->data)};
   if(queue.size()<num){
     queue.push(temp);
   }
-  if(queue.size()==num){
+  if(queue.size()>=num){
         if(temp<queue.top()){
             queue.pop();
             queue.push(temp);
@@ -104,7 +104,6 @@ Entry temp=Entry{root->data,distance(target,root->data)};
   
 }
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
- priority_queue<Entry> queue;
  Point p={x,y,z};
  findN(root,n,p,1,queue);
  std::vector<Star> result;
