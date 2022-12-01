@@ -5,6 +5,9 @@ Station::Station(string& n, size_t s){
     size=s;
 }
 Station::~Station(){
+    for(auto edge: lines){
+        delete edge;
+    }
     lines.~set();
 }
 void Station::addEdge(Edge* e){
