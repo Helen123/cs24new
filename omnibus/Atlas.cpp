@@ -17,21 +17,26 @@ while (std::getline(stream, line)){
     Station* lastS=nullptr;
     if(line[0]!='-'){
       lastS=nullptr;
+      std::string token;
+      std::stringstream ss(line);
+      std::getline(ss, token,' ' );
+      std::getline(ss, token);
       if(line[0]=='B'){
         istrain=0;
-        linename=line.substr(5,line.length()-5);
+        linename=token;
       }
       else{
         istrain=1;
-        linename=line.substr(7,line.length()-7);
+        linename=token;
       }
     }
     else{
     std::string token;
     std::stringstream ss(line);
     std::getline(ss, token,' ' );
-    size_t s=size_t(std::stoi(token.substr(2,token.length()-2)));
     std::getline(ss, token,' ' );
+    size_t s=size_t(stoi(token));
+    std::getline(ss, token);
     std::string stationname=token;
     Station* s1;
     if(stops[token]!=nullptr){
