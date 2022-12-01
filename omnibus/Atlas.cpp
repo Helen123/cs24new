@@ -1,6 +1,7 @@
 #include "Atlas.h"
 #include <sstream>
 #include <queue>  
+#include <string> 
 
 Atlas* Atlas::create(std::istream& stream) {
   // This default implementation will probably do what you want.
@@ -29,7 +30,7 @@ while (std::getline(stream, line)){
     std::string token;
     std::stringstream ss(line);
     std::getline(ss, token,' ' );
-    size_t s=size_t(stoi(token.substr(1,token.length()-1)));
+    size_t s=size_t(std::stoi(token.substr(2,token.length()-2)));
     std::getline(ss, token,' ' );
     std::string stationname=token;
     Station* s1;
