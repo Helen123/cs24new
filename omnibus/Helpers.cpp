@@ -7,7 +7,7 @@ Station::Station(string& n, size_t s){
 Station::~Station(){
     lines.~set();
 }
-void Station::addEdge(Edge e){
+void Station::addEdge(Edge* e){
     lines.insert(e);
 }
 Edge::Edge(string& l,size_t c, string& s,string& d){

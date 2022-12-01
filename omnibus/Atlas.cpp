@@ -44,15 +44,15 @@ while (std::getline(stream, line)){
 
     if(lastS!=nullptr){
       if(istrain==0){
-        Edge e1=Edge(linename,0,lastS->name,token);
-        Edge e2=Edge(linename,0,token,lastS->name);
+        Edge* e1=new Edge(linename,0,lastS->name,token);
+        Edge* e2=new Edge(linename,0,token,lastS->name);
         lastS->addEdge(e1);
         s1->addEdge(e2);
       }
       else{
         size_t cost=s-lastS->size;
-        Edge e1=Edge(linename,cost,lastS->name,token);
-        Edge e2=Edge(linename,cost,token,lastS->name);
+        Edge* e1=new Edge(linename,cost,lastS->name,token);
+        Edge* e2=new Edge(linename,cost,token,lastS->name);
         lastS->addEdge(e1);
         s1->addEdge(e2);
       }
@@ -91,13 +91,13 @@ Atlas::~Atlas(){
     vis[sName] = true;
     dist[sName]=minValue;
     for (auto edge : stas[sName]->lines){
-    if(edge.desti!=sName){
+    if(edge->desti!=sName){
       size_t newDist;
-      if (vis[edge.desti]==0){
-        newDist = dist[sName] + edge.cost;
-        prev.insert(prev.end(),edge);
-        dist[edge.desti] = newDist;
-        Entry e2=Entry{edge.desti,newDist};
+      if (vis[edge->desti]==0){
+        newDist = dist[sName] + edge->cost;
+        prev.insert(prev.end(),*edge);
+        dist[edge->desti] = newDist;
+        Entry e2=Entry{edge->desti,newDist};
         pq.push(e2);
       }
     }

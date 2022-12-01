@@ -22,11 +22,11 @@ class Station{
     public:
         Station(string& n,size_t s);
         ~Station();
-        void addEdge(Edge e);
+        void addEdge(Edge* e);
 
     string name;
     size_t size;
-    set<Edge> lines;
+    set<Edge*> lines;
 
 
     
