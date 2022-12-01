@@ -127,7 +127,7 @@ void Atlas::print(){
     for (auto edge : stas[sName]->lines){
       //cout<<"last stattion: "<<last[sName]<<endl;
     if(edge->desti!=last[sName]){
-      cout<<edge->print()<<endl;
+      //cout<<edge->print()<<endl;
       size_t newDist;
       if (vis[edge->desti]==0){
         //cout<<"get 2"<<endl;
