@@ -15,6 +15,7 @@ class Edge{
     size_t cost;
     string start;
     string desti;
+    string print();
 
 
 };
@@ -23,6 +24,7 @@ class Station{
         Station(string& n,size_t s);
         ~Station();
         void addEdge(Edge* e);
+        string print();
 
     string name;
     size_t size;

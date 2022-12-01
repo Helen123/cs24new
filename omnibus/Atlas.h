@@ -22,6 +22,7 @@ public:
   ~Atlas();
 
   // Required Member Function
+  void print ();
   Trip route(const std::string& src, const std::string& dst);
 };
 
