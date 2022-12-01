@@ -13,7 +13,7 @@ bool istrain=0;
 std::string linename;
 while (std::getline(stream, line)){
   if(line[0]!='#'&& line[0]!=' '){
-    Station* lastS;
+    Station* lastS=nullptr;
     if(line[0]!='-'){
       lastS=nullptr;
       if(line[0]=='B'){
@@ -80,9 +80,8 @@ Atlas::~Atlas(){
     for (auto it = stas.begin(); it != stas.end(); it++) {
         vis[it->first]=SIZE_MAX;
   }
-  dist[s] = 0;
   Entry newentry=Entry{s,0};
-  priority_queue <Entry, vector<Entry>, greater<Entry> > pq;
+  priority_queue <Entry> pq;
   pq.push(newentry);
   while (pq.size() != 0){
     Entry entry1=pq.top();
@@ -90,6 +89,7 @@ Atlas::~Atlas(){
     string sName=entry1.stationname;
     size_t minValue=entry1.totaltime;
     vis[sName] = true;
+    dist[sName]=minValue;
     for (auto edge : stas[sName]->lines){
     if(edge.desti!=sName){
       size_t newDist;
@@ -106,6 +106,8 @@ Atlas::~Atlas(){
     }
     }
   }
+  vector<Edge> nothing;
+  return nothing;
  }
 
 Trip Atlas::route(const std::string& src, const std::string& dst){
@@ -113,6 +115,9 @@ Trip out;
 out.start=src;
 string currentline;
 vector<Edge> path=dijkstra(stops,src,dst);
+if(path.size()==0){
+    throw std::runtime_error("No route");
+}
 for(size_t i=0; i<path.size();i++){
 if(i==0){
 currentline=path[0].lineName;

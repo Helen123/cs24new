@@ -16,5 +16,8 @@ Edge::Edge(string& l,size_t c, string& s,string& d){
     start=s;
     desti=d;
 }
+bool Entry::operator < (const Entry& other) const {
+        return this->totaltime > other.totaltime;
+    }
     
 // Space to implement helper class member functions.
