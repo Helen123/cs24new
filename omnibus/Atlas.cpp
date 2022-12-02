@@ -131,7 +131,7 @@ void Atlas::print(){
       break;
     }
     for (auto edge : stas[sName]->lines){
-      cout<<stas[sName]->print()<<endl;
+      //cout<<stas[sName]->print()<<endl;
     if(edge->desti!=last[sName]->start){
       //cout<<edge->print()<<endl;
       size_t newDist;
@@ -160,7 +160,7 @@ Trip Atlas::route(const std::string& src, const std::string& dst){
 Trip out;
 out.start=src;
 string currentline;
-std::cout<<stops["Meett"]->print()<<endl;
+//std::cout<<stops["Meett"]->print()<<endl;
 map<string,Edge*> path=dijkstra(stops,src,dst);
 if(path.size()==0){
     throw std::runtime_error("No route");
