@@ -36,9 +36,9 @@ while (std::getline(stream, line)){
     else{//station case
     std::string token;
     std::stringstream ss(line);
-    std::getline(ss, token,' ' );
+    ss>>token;
     //cout<<"frist token: "<<token<<endl;
-    std::getline(ss, token,' ' );
+    ss>>token;
     //cout<<"second token: "<<token<<endl;
     size_t s=size_t(stoi(token));
     std::getline(ss >> std::ws, token);
@@ -99,53 +99,58 @@ void Atlas::print(){
     }
 }
 
- vector<Edge> dijkstra(map<string,Station*> stas, string s, string e){
+ map<string,Edge*> dijkstra(map<string,Station*> stas, string s, string e){
   map<string, bool> vis;
   for (auto it = stas.begin(); it != stas.end(); it++) {
         vis[it->first]=0;
   }
-  vector<Edge> prev;
   map<string, size_t> dist;
     for (auto it = stas.begin(); it != stas.end(); it++) {
         dist[it->first]=SIZE_MAX;
   }
-  map<string, string> last;
+  map<string, Edge*> last;
     for (auto it = stas.begin(); it != stas.end(); it++) {
-        last[it->first]="#";
+        last[it->first]=nullptr;
         }
-  Entry newentry=Entry{s,0};
+  string a ="#";
+  Edge* e3=new Edge(a,size_t(0),s,s);
+  //cout<<e3->print()<<endl;
+  last[s]=e3;
+  Entry newentry=Entry{e3,0};
   priority_queue <Entry> pq;
   pq.push(newentry);
   while (pq.size() != 0){
     Entry entry1=pq.top();
     pq.pop();
-    string sName=entry1.stationname;
+    string sName=entry1.edgeToS->desti;
     size_t minValue=entry1.totaltime;
     vis[sName] = true;
     dist[sName]=minValue;
-    
+    //cout<<stas[sName]->print()<<endl;
+    if(stas[sName]==nullptr){
+      break;
+    }
     for (auto edge : stas[sName]->lines){
-      //cout<<"last stattion: "<<last[sName]<<endl;
-    if(edge->desti!=last[sName]){
+      cout<<stas[sName]->print()<<endl;
+    if(edge->desti!=last[sName]->start){
       //cout<<edge->print()<<endl;
       size_t newDist;
       if (vis[edge->desti]==0){
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
-        prev.insert(prev.end(),*edge);
         dist[edge->desti] = newDist;
-        last[edge->desti]=sName;
-        Entry e2=Entry{edge->desti,newDist};
+        last[edge->desti]=edge;
+        Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
         pq.push(e2);
       }
      if (edge->desti == e){
-      return prev;
+      return last;
     }
     }
   }
   }
-  vector<Edge> nothing;
+  map<string,Edge*> nothing;
   //std::cout<<"have nothing"<<endl;
   return nothing;
  }
@@ -155,23 +160,30 @@ Trip Atlas::route(const std::string& src, const std::string& dst){
 Trip out;
 out.start=src;
 string currentline;
-vector<Edge> path=dijkstra(stops,src,dst);
+std::cout<<stops["Meett"]->print()<<endl;
+map<string,Edge*> path=dijkstra(stops,src,dst);
 if(path.size()==0){
     throw std::runtime_error("No route");
 }
-for(size_t i=0; i<path.size();i++){
+vector<Edge>path1;
+string curr=dst;
+while(curr!=src){
+path1.insert(path1.begin(),*path[curr]);
+curr=path[curr]->start;
+}
+for(size_t i=0; i<path1.size();i++){
 if(i==0){
-currentline=path[0].lineName;
-Trip::Leg newleg=Trip::Leg{path[0].lineName,path[0].desti};
+currentline=path1[0].lineName;
+Trip::Leg newleg=Trip::Leg{path1[0].lineName,path1[0].desti};
 out.legs.insert(out.legs.end(),newleg);
 }
 else{
-  if(path[i].lineName==currentline){
-    out.legs[out.legs.size()-1].stop=path[i].desti;
+  if(path1[i].lineName==currentline){
+    out.legs[out.legs.size()-1].stop=path1[i].desti;
   }
   else{
-    currentline=path[i].lineName;
-    Trip::Leg newleg=Trip::Leg{path[i].lineName,path[i].desti};
+    currentline=path1[i].lineName;
+    Trip::Leg newleg=Trip::Leg{path1[i].lineName,path1[i].desti};
     out.legs.insert(out.legs.end(),newleg);
   }
 }

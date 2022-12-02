@@ -35,7 +35,7 @@ class Station{
 };
 
 struct Entry {
-        string      stationname;
+        Edge*      edgeToS;
         size_t       totaltime;
         public:
        bool operator < (const Entry& other) const;
