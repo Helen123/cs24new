@@ -8,7 +8,7 @@ Station::~Station(){
     for(auto edge: lines){
         delete edge;
     }
-    lines.~set();
+    //lines.~set();
 }
 void Station::addEdge(Edge* e){
     lines.insert(e);
@@ -32,6 +32,6 @@ string Edge::print(){
 }
 bool Entry::operator < (const Entry& other) const {
         return this->totaltime > other.totaltime;
-    }
+}
     
 // Space to implement helper class member functions.

@@ -88,7 +88,10 @@ while (std::getline(stream, line)){
 }
 Atlas::~Atlas(){
     for(auto itr=stops.begin();itr!=stops.end();++itr){
-      delete itr->second;
+      //  for(auto edge:itr->second->lines){
+      //   delete edge;
+      //  }
+       delete itr->second;
     }
     stops.erase(stops.begin(),stops.end());
 }
@@ -99,7 +102,7 @@ void Atlas::print(){
     }
 }
 
- map<string,Edge*> dijkstra(map<string,Station*> stas, string s, string e){
+ map<string,Edge*> dijkstra(map<string,Station*> stas,size_t n, string s, string e){
   map<string, bool> vis;
   for (auto it = stas.begin(); it != stas.end(); it++) {
         vis[it->first]=0;
@@ -119,17 +122,25 @@ void Atlas::print(){
   Entry newentry=Entry{e3,0};
   priority_queue <Entry> pq;
   pq.push(newentry);
+  size_t visited=0;
   while (pq.size() != 0){
     Entry entry1=pq.top();
     pq.pop();
     string sName=entry1.edgeToS->desti;
     size_t minValue=entry1.totaltime;
-    vis[sName] = true;
-    dist[sName]=minValue;
-    //cout<<stas[sName]->print()<<endl;
     if(stas[sName]==nullptr){
       break;
     }
+    if(vis[sName]==false){
+      visited++;
+    }
+    if(visited>n){
+      break;
+    }
+    vis[sName] = true;
+    dist[sName]=minValue;
+    //cout<<stas[sName]->print()<<endl;
+    
     for (auto edge : stas[sName]->lines){
       //cout<<stas[sName]->print()<<endl;
     if(edge->desti!=last[sName]->start){
@@ -160,8 +171,9 @@ Trip Atlas::route(const std::string& src, const std::string& dst){
 Trip out;
 out.start=src;
 string currentline;
+size_t size=stops.size();
 //std::cout<<stops["Meett"]->print()<<endl;
-map<string,Edge*> path=dijkstra(stops,src,dst);
+map<string,Edge*> path=dijkstra(stops,size,src,dst);
 if(path.size()==0){
     throw std::runtime_error("No route");
 }

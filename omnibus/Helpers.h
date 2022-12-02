@@ -39,7 +39,9 @@ struct Entry {
         size_t       totaltime;
         public:
        bool operator < (const Entry& other) const;
-};
+       };
+
+
 // struct CompareE {
 //     bool operator()(Entry const& p1, Entry const& p2)
 //     {
