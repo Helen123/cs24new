@@ -134,7 +134,7 @@ void Atlas::print(){
     if(vis[sName]==false){
       visited++;
     }
-    if(visited>n){
+    if(visited>=n){
       break;
     }
     vis[sName] = true;
