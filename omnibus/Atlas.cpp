@@ -161,6 +161,8 @@ void Atlas::print(){
     }
   }
   }
+  delete e3;
+  e3=nullptr;
   map<string,Edge*> nothing;
   //std::cout<<"have nothing"<<endl;
   return nothing;
@@ -175,7 +177,7 @@ size_t size=stops.size();
 //std::cout<<stops["Meett"]->print()<<endl;
 map<string,Edge*> path=dijkstra(stops,size,src,dst);
 if(path.size()==0){
-    throw std::runtime_error("No route");
+    throw std::runtime_error("No route.");
 }
 vector<Edge>path1;
 string curr=dst;
