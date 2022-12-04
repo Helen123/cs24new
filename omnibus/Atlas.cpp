@@ -137,7 +137,14 @@ void Atlas::print(){
     Entry entry1=pq.top();
     pq.pop();
     string sName=entry1.edgeToS->desti;
-    size_t minValue=entry1.totaltime;
+    size_t minValue=entry1.totaltime;   
+    if(vis[sName]==true){continue;}   
+    visited++;
+    if(visited>=n){
+      //cout<<"break from visited:"<<visited;
+      break;
+    }
+    
     if(stas[sName]==nullptr){
       break;
     }
@@ -163,22 +170,16 @@ void Atlas::print(){
         //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
+        if (minValue < dist[sName]){
         dist[edge->desti] = newDist;
         last[edge->desti]=edge;
         Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
-        pq.push(e2);
+          pq.push(e2);}
       }
     }
   }
-      if(vis[sName]==false){
-      visited++;
-    }
-    if(visited>=n){
-      //cout<<"break from visited:"<<visited;
-      break;
-    }
-    vis[sName] = true;
+vis[sName] = true;
   }
    delete e3;
    //e3=nullptr;
