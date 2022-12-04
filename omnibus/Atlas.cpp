@@ -47,10 +47,10 @@ while (std::getline(stream, line)){
     std::string stationname=token;
     Station* s1;
     if(stops[token]!=nullptr){
-      std::cout<<"old station"<<endl;
+      //std::cout<<"old station"<<endl;
      s1=stops[token];
      
-     cout<<s1->print()<<endl;
+     //cout<<s1->print()<<endl;
     }
     else{
       //std::cout<<"new station"<<endl;
@@ -72,7 +72,7 @@ while (std::getline(stream, line)){
       }
       else{
         size_t cost;
-        cout<<lastS->print()<<endl;
+        //cout<<lastS->print()<<endl;
         if(s>lasts){
         cost=s-lasts;}
         else{
@@ -151,8 +151,8 @@ void Atlas::print(){
     dist[sName]=minValue;
     last[sName]=entry1.edgeToS;
     }
-    cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
-    cout<<"this station:"<<stas[sName]->print()<<endl;
+    //cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
+    //cout<<"this station:"<<stas[sName]->print()<<endl;
     if(sName==e){
       return last;
     }
@@ -167,7 +167,7 @@ void Atlas::print(){
       //cout<<edge->print()<<endl;
       size_t newDist;
       if (vis[edge->desti]==0){
-        cout<<"test edge:"<<edge->print()<<endl;
+        //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
         dist[edge->desti] = newDist;
