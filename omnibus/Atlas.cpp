@@ -141,12 +141,6 @@ void Atlas::print(){
     if(stas[sName]==nullptr){
       break;
     }
-    if(vis[sName]==false){
-      visited++;
-    }
-    if(visited>=n){
-      break;
-    }
     if (minValue < dist[sName]){
     dist[sName]=minValue;
     last[sName]=entry1.edgeToS;
@@ -156,7 +150,6 @@ void Atlas::print(){
     if(sName==e){
       return last;
     }
-    vis[sName] = true;
     dist[sName]=minValue;
   //cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
     //cout<<stas[sName]->print()<<endl;
@@ -178,9 +171,17 @@ void Atlas::print(){
       }
     }
   }
+      if(vis[sName]==false){
+      visited++;
+    }
+    if(visited>=n){
+      cout<<"break from visited:"<<visited;
+      break;
+    }
+    vis[sName] = true;
   }
   // delete e3;
-  // e3=nullptr;
+   //e3=nullptr;
   map<string,Edge*> nothing;
   //std::cout<<"have nothing"<<endl;
   return nothing;
