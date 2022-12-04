@@ -162,7 +162,7 @@ void Atlas::print(){
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
-      //cout<<stas[sName]->print()<<endl;
+     // cout<<stas[sName]->print()<<endl;
     if(edge->desti!=last[sName]->start){
       //cout<<edge->print()<<endl;
       size_t newDist;
@@ -170,7 +170,8 @@ void Atlas::print(){
         //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
-        if (minValue < dist[sName]){
+        if (newDist < dist[edge->desti]){
+        //cout<<"test edge:"<<edge->print()<<endl;
         dist[edge->desti] = newDist;
         last[edge->desti]=edge;
         Entry e2=Entry{edge,newDist};
