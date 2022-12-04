@@ -14,6 +14,7 @@ std::string line;
 bool istrain=0;
 std::string linename;
 Station* lastS=nullptr;
+size_t lasts=0;
 while (std::getline(stream, line)){
   if(line[0]=='T'|| line[0]=='B'||line[0]=='-'){//valid lines
     //cout<<"the line: "<<line<<endl;
@@ -46,12 +47,14 @@ while (std::getline(stream, line)){
     std::string stationname=token;
     Station* s1;
     if(stops[token]!=nullptr){
-     // std::cout<<"old station"<<endl;
+      std::cout<<"old station"<<endl;
      s1=stops[token];
+     
+     cout<<s1->print()<<endl;
     }
     else{
       //std::cout<<"new station"<<endl;
-    s1=new Station(token, s);
+    s1=new Station(token);
     stops[token]=s1; 
     //std::cout<<s1->print()<<endl;
     }
@@ -68,7 +71,13 @@ while (std::getline(stream, line)){
         e2=nullptr;
       }
       else{
-        size_t cost=s-lastS->size;
+        size_t cost;
+        cout<<lastS->print()<<endl;
+        if(s>lasts){
+        cost=s-lasts;}
+        else{
+          cost=lasts-s;
+        }
         Edge* e1=new Edge(linename,cost,lastS->name,token);
         Edge* e2=new Edge(linename,cost,token,lastS->name);
         lastS->addEdge(e1);
@@ -78,6 +87,7 @@ while (std::getline(stream, line)){
       }
     }
     lastS=s1;
+    lasts=s;
     //cout<<lastS->print()<<endl;
     s1=nullptr;
     }
@@ -137,8 +147,18 @@ void Atlas::print(){
     if(visited>=n){
       break;
     }
+    if (minValue < dist[sName]){
+    dist[sName]=minValue;
+    last[sName]=entry1.edgeToS;
+    }
+    cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
+    cout<<"this station:"<<stas[sName]->print()<<endl;
+    if(sName==e){
+      return last;
+    }
     vis[sName] = true;
     dist[sName]=minValue;
+  //cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
@@ -147,6 +167,7 @@ void Atlas::print(){
       //cout<<edge->print()<<endl;
       size_t newDist;
       if (vis[edge->desti]==0){
+        cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
         dist[edge->desti] = newDist;
@@ -155,9 +176,6 @@ void Atlas::print(){
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
         pq.push(e2);
       }
-     if (edge->desti == e){
-      return last;
-    }
     }
   }
   }

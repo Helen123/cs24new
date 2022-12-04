@@ -21,13 +21,12 @@ class Edge{
 };
 class Station{
     public:
-        Station(string& n,size_t s);
+        Station(string& n);
         ~Station();
         void addEdge(Edge* e);
         string print();
 
     string name;
-    size_t size;
     set<Edge*> lines;
 
 
