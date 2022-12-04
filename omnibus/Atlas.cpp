@@ -136,7 +136,9 @@ void Atlas::print(){
     if(stas[sName]==nullptr){
       break;
     }
+    if (minValue < dist[sName]){
     dist[sName]=minValue;
+    }
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
@@ -185,6 +187,7 @@ size_t size=stops.size();
 map<string,Edge*> path=dijkstra(stops,size,src,dst);
 //cout<<path.size()<<endl;
 if(path.size()==0){
+  delete path[src];
     throw std::runtime_error("No route.");
 }
 delete path[src];
