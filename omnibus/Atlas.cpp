@@ -123,23 +123,22 @@ void Atlas::print(){
   priority_queue <Entry> pq;
   pq.push(newentry);
   size_t visited=0;
-  if(stas[s]==nullptr||stas[e]==nullptr){
-        map<string,Edge*> nothing;
-  //std::cout<<"have nothing"<<endl;
-  return nothing;
-  }
   while (pq.size() != 0){
     Entry entry1=pq.top();
     pq.pop();
     string sName=entry1.edgeToS->desti;
     size_t minValue=entry1.totaltime;
-    if (minValue < dist[sName]){
+    if(stas[sName]==nullptr){
+      break;
+    }
+    if(vis[sName]==false){
+      visited++;
+    }
+    if(visited>=n){
+      break;
+    }
+    vis[sName] = true;
     dist[sName]=minValue;
-    last[sName]=entry1.edgeToS;
-    }
-    if(sName==e){
-      return last;
-    }
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
@@ -150,24 +149,17 @@ void Atlas::print(){
       if (vis[edge->desti]==0){
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
-        if (newDist < dist[edge->desti]){
         dist[edge->desti] = newDist;
         last[edge->desti]=edge;
         Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
         pq.push(e2);
-        }
       }
-
+     if (edge->desti == e){
+      return last;
     }
-  }  
-  if(vis[sName]==false){
-      visited++;
+    }
   }
-  if(visited>=n){
-      break;
-    }
-  vis[sName] = true;
   }
   // delete e3;
   // e3=nullptr;
@@ -184,20 +176,15 @@ string currentline;
 size_t size=stops.size();
 //std::cout<<stops["Meett"]->print()<<endl;
 map<string,Edge*> path=dijkstra(stops,size,src,dst);
-//cout<<path.size()<<endl;
 if(path.size()==0){
-  delete path[src];
+    delete path[src];
     throw std::runtime_error("No route.");
 }
 delete path[src];
-//cout<<path.size()<<endl;
 
 vector<Edge>path1;
 string curr=dst;
 while(curr!=src){
-  if(path[curr]==nullptr){
-    break;
-  }
 path1.insert(path1.begin(),*path[curr]);
 curr=path[curr]->start;
 }
