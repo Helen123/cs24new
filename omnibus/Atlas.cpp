@@ -132,14 +132,12 @@ void Atlas::print(){
   Entry newentry=Entry{e3,0};
   priority_queue <Entry> pq;
   pq.push(newentry);
-  size_t visited=0;
   while (pq.size() != 0){
     Entry entry1=pq.top();
     pq.pop();
     string sName=entry1.edgeToS->desti;
     size_t minValue=entry1.totaltime;   
     if(vis[sName]==true){continue;}   
-    visited++;
     vis[sName] = true;
     
     if(stas[sName]==nullptr){
@@ -161,22 +159,21 @@ void Atlas::print(){
     
     for (auto edge : stas[sName]->lines){
       //cout<<stas[sName]->print()<<endl;
-    if(edge->desti!=last[sName]->start){
+
       //cout<<edge->print()<<endl;
       size_t newDist;
       if (vis[edge->desti]==0){
         //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
-        if (newDist < dist[edge->desti]){
         //cout<<"test edge:"<<edge->print()<<endl;
         dist[edge->desti] = newDist;
         last[edge->desti]=edge;
         Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
-          pq.push(e2);}
+          pq.push(e2);
       }
-    }
+    
   }
 
   }
