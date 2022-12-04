@@ -180,7 +180,7 @@ void Atlas::print(){
     }
     vis[sName] = true;
   }
-  // delete e3;
+   delete e3;
    //e3=nullptr;
   map<string,Edge*> nothing;
   //std::cout<<"have nothing"<<endl;
@@ -200,7 +200,7 @@ if(path.size()==0){
     throw std::runtime_error("No route.");
 }
 delete path[src];
-
+path[src]=nullptr;
 vector<Edge>path1;
 string curr=dst;
 while(curr!=src){
