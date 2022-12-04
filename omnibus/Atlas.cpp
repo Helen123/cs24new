@@ -175,7 +175,7 @@ void Atlas::print(){
       visited++;
     }
     if(visited>=n){
-      cout<<"break from visited:"<<visited;
+      //cout<<"break from visited:"<<visited;
       break;
     }
     vis[sName] = true;
