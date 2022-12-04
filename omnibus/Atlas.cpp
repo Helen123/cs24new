@@ -140,6 +140,7 @@ void Atlas::print(){
     size_t minValue=entry1.totaltime;   
     if(vis[sName]==true){continue;}   
     visited++;
+    vis[sName] = true;
     
     if(stas[sName]==nullptr){
       break;
@@ -177,12 +178,12 @@ void Atlas::print(){
       }
     }
   }
-vis[sName] = true;
+
   }
    delete e3;
    //e3=nullptr;
   map<string,Edge*> nothing;
-  std::cout<<"have nothing"<<endl;
+  //std::cout<<"have nothing"<<endl;
   return nothing;
  }
  
