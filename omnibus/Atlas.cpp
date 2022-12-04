@@ -149,17 +149,20 @@ void Atlas::print(){
       if (vis[edge->desti]==0){
         //cout<<"get 2"<<endl;
         newDist = dist[sName] + edge->cost;
+        if (newDist < dist[edge->desti]){
         dist[edge->desti] = newDist;
         last[edge->desti]=edge;
         Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
         pq.push(e2);
+        }
       }
      if (edge->desti == e){
       return last;
     }
     }
   }
+  vis[sName] = true;
   }
   // delete e3;
   // e3=nullptr;
@@ -183,6 +186,9 @@ if(path.size()==0){
 vector<Edge>path1;
 string curr=dst;
 while(curr!=src){
+  if(path[curr]==nullptr){
+    break;
+  }
 path1.insert(path1.begin(),*path[curr]);
 curr=path[curr]->start;
 }
