@@ -133,11 +133,12 @@ void Atlas::print(){
     pq.pop();
     string sName=entry1.edgeToS->desti;
     size_t minValue=entry1.totaltime;
-    if(stas[sName]==nullptr){
-      break;
-    }
     if (minValue < dist[sName]){
     dist[sName]=minValue;
+    last[sName]=entry1.edgeToS;
+    }
+    if(sName==e){
+      return last;
     }
     //cout<<stas[sName]->print()<<endl;
     
@@ -159,9 +160,7 @@ void Atlas::print(){
       }
 
     }
-  }     if (sName == e){
-      return last;
-    }
+  }  
   if(vis[sName]==false){
       visited++;
   }
