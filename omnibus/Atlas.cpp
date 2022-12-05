@@ -176,7 +176,7 @@ void Atlas::print(){
    delete e3;
    //e3=nullptr;
   vector<Edge*> nothing;
-  std::cout<<"have nothing"<<endl;
+  //std::cout<<"have nothing"<<endl;
   return nothing;
  }
  
