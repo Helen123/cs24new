@@ -130,7 +130,7 @@ void Atlas::print(){
     Entry entry1=pq.top();
     pq.pop();
     string sName=entry1.edgeToS->desti;
-    size_t id=stas[s]->id;
+    size_t id=stas[sName]->id;
     size_t minValue=entry1.totaltime;   
     if(vis[id]==true){continue;}   
     vis[id] = true;
@@ -142,7 +142,7 @@ void Atlas::print(){
     dist[id]=minValue;
     last[id]=entry1.edgeToS;
     }
-    //cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
+    cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
    // cout<<"this station:"<<stas[sName]->print()<<endl;
     if(sName==e){
      //cout<<"return from break"<<endl;
@@ -153,13 +153,13 @@ void Atlas::print(){
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
-      //cout<<stas[sName]->print()<<endl;
+      cout<<stas[sName]->print()<<endl;
 
       //cout<<edge->print()<<endl;
       size_t newDist;
       size_t id1=stas[edge->desti]->id;
       if (vis[id1]==0){
-        //cout<<"test edge:"<<edge->print()<<endl;
+        cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[id] + edge->cost;
         //cout<<"test edge:"<<edge->print()<<endl;
@@ -176,7 +176,7 @@ void Atlas::print(){
    delete e3;
    //e3=nullptr;
   vector<Edge*> nothing;
-  //std::cout<<"have nothing"<<endl;
+  std::cout<<"have nothing"<<endl;
   return nothing;
  }
  
