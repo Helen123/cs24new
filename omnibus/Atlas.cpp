@@ -135,9 +135,9 @@ void Atlas::print(){
     if(vis[id]==true){continue;}   
     vis[id] = true;
     
-    if(stas[sName]==nullptr){
-      break;
-    }
+    // if(stas[sName]==nullptr){
+    //   break;
+    // }
     if (minValue < dist[id]){
     dist[id]=minValue;
     last[id]=entry1.edgeToS;
