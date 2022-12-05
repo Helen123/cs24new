@@ -1,7 +1,8 @@
 #include "Helpers.h"
 
-Station::Station(string& n){
+Station::Station(string& n,size_t i){
     name=n;
+    id=i;
 }
 Station::~Station(){
     for(auto edge: lines){
