@@ -190,7 +190,7 @@ size_t size=stops.size();
 vector<Edge*> path=dijkstra(stops,size,src,dst);
 size_t id=stops[src]->id;
 if(path.size()==0){
-    delete path[id];
+    //delete path[id];
     throw std::runtime_error("No route.");
 }
 delete path[id];
