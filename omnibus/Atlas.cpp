@@ -162,12 +162,14 @@ void Atlas::print(){
         //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[id] + edge->cost;
+        if (newDist < dist[id1]){
         //cout<<"test edge:"<<edge->print()<<endl;
         dist[id1] = newDist;
         last[id1]=edge;
         Entry e2=Entry{edge,newDist};
         //cout<<"edge:"<<e2.stationname<<" time: "<<e2.totaltime<<endl;
           pq.push(e2);
+        }
       }
     
   }
