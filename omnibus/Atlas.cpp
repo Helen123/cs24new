@@ -142,7 +142,7 @@ void Atlas::print(){
     dist[id]=minValue;
     last[id]=entry1.edgeToS;
     }
-    cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
+    //cout<<"pop:"<<sName<<" value: "<<minValue<<endl;
    // cout<<"this station:"<<stas[sName]->print()<<endl;
     if(sName==e){
      //cout<<"return from break"<<endl;
@@ -153,13 +153,13 @@ void Atlas::print(){
     //cout<<stas[sName]->print()<<endl;
     
     for (auto edge : stas[sName]->lines){
-      cout<<stas[sName]->print()<<endl;
+      //cout<<stas[sName]->print()<<endl;
 
       //cout<<edge->print()<<endl;
       size_t newDist;
       size_t id1=stas[edge->desti]->id;
       if (vis[id1]==0){
-        cout<<"test edge:"<<edge->print()<<endl;
+        //cout<<"test edge:"<<edge->print()<<endl;
         //cout<<"get 2"<<endl;
         newDist = dist[id] + edge->cost;
         //cout<<"test edge:"<<edge->print()<<endl;
